@@ -83,8 +83,39 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	  // your solution here
+	<script>    
+	  $("#rotate-box").hammer({
+	    recognizers: [
+		    [Hammer.Rotate]
+	    ]
+    }).bind("rotate", function(ev) {
+	    console.log(ev);
+      $("#rotate-box").css({"transform":"rotate(" + ev.gesture.rotation + "deg)"});
+    });
+	  $("#pinch-box").hammer( {
+	recognizers: [
+		[Hammer.Pinch, { enable: true }]
+	]
+}).bind('pinch', function(ev) {
+	    console.log(ev);
+      $("#pinch-box").css({"transform":"scale(" + ev.gesture.scale + ")"});
+    });
+	  $("#press-box").hammer().bind('press', function(ev) {
+	    console.log(ev);
+      $("#press-box").css({"background-color":"#f00"});
+    });
+	  $("#pan-box").hammer().bind('pan', function(ev) {
+	    console.log(ev);
+      $("#pan-box").css({"transform":"translate(" + ev.gesture.deltaX + "px, " + ev.gesture.deltaY + "px)"});
+    });
+	  $("#tap-box").hammer().bind('tap', function(ev) {
+	    console.log(ev);
+      $("#tap-box").css({"background-color":"#2f0"});
+    });
+	  $("#swipe-box").hammer().bind('swipe', function(ev) {
+	    console.log(ev);
+      $("#swipe-box").css({"transform":"translate(" + ev.gesture.deltaX + "px, " + ev.gesture.deltaY + "px)"});
+    });
   </script>
 </body>
 </html>
